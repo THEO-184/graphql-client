@@ -2,7 +2,6 @@ import { useState } from "react";
 import Clients from "./components/Clients";
 import Header from "./components/Header";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import Modal from "./components/Modal";
 
 const cache = new InMemoryCache({
 	typePolicies: {
@@ -29,6 +28,9 @@ const client = new ApolloClient({
 });
 
 function App() {
+	// const { data } = useFetchProjects();
+
+	// console.log("data", data);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
