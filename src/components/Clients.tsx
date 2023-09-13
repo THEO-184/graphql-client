@@ -36,7 +36,7 @@ const Clients: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 	}
 
 	return (
-		<div className="mt-28 mx-6">
+		<div className="mt-28">
 			<Project projects={projects?.projects} isLoading={gettingProjects} />
 			<div className="my-14"></div>
 			<Table data={data} onDelete={handleDelete} onEdit={handleEdit} />

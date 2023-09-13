@@ -2,6 +2,9 @@ import { useState } from "react";
 import Clients from "./components/Clients";
 import Header from "./components/Header";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+import Project from "./pages/Project";
 
 const cache = new InMemoryCache({
 	typePolicies: {
@@ -28,9 +31,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-	// const { data } = useFetchProjects();
-
-	// console.log("data", data);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
@@ -39,16 +39,24 @@ function App() {
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <Home isOpen={isModalOpen} onClose={closeModal} />,
+		},
+		{
+			path: "projects/:id",
+			element: <Project />,
+		},
+	]);
 
 	return (
-		<>
+		<div className="mx-6">
 			<ApolloProvider client={client}>
 				<Header openModal={openModal} />
-				<div className="h-[210vh]">
-					<Clients isOpen={isModalOpen} onClose={closeModal} />
-				</div>
+				<RouterProvider router={router} />
 			</ApolloProvider>
-		</>
+		</div>
 	);
 }
 
